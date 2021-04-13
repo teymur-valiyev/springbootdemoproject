@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.teamlearning.springbootdemo.dto.ErrorMessagesDTO;
+import org.teamlearning.springbootdemo.domain.dto.ErrorMessagesDTO;
 
 import java.util.List;
 

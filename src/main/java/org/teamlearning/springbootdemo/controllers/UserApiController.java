@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-import org.teamlearning.springbootdemo.dto.SignupDTO;
-import org.teamlearning.springbootdemo.dto.UserDTO;
-import org.teamlearning.springbootdemo.dto.UserResponseDTO;
-import org.teamlearning.springbootdemo.dto.UserUpdateDTO;
+import org.teamlearning.springbootdemo.domain.dto.SignupDTO;
+import org.teamlearning.springbootdemo.domain.dto.UserDTO;
+import org.teamlearning.springbootdemo.domain.dto.UserResponseDTO;
+import org.teamlearning.springbootdemo.domain.dto.UserUpdateDTO;
 import org.teamlearning.springbootdemo.service.UserService;
 
 import javax.validation.Valid;

@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    password: demo
+    url: jdbc:postgresql://localhost:5432/demo
+    username: demo
+    hikari:
+      maximum-pool-size: 30
+      max-lifetime: 1800000
+      idle-timeout: 600000
+  liquibase:
+    change-log: classpath:/db/changelog/changelog.xml
+    enabled: false
+  main:
+    allow-bean-definition-overriding: true
+
+#logging.level.org.springframework.web:DEBUG
+

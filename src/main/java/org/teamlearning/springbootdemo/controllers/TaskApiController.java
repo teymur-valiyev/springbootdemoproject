@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.teamlearning.springbootdemo.dto.*;
+import org.teamlearning.springbootdemo.domain.dto.*;
 import org.teamlearning.springbootdemo.service.TaskService;
 
 import javax.validation.Valid;

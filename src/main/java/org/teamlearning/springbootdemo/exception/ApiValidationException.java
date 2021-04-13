@@ -1,7 +1,7 @@
 package org.teamlearning.springbootdemo.exception;
 
 import lombok.AllArgsConstructor;
-import org.teamlearning.springbootdemo.dto.ErrorMessagesDTO;
+import org.teamlearning.springbootdemo.domain.dto.ErrorMessagesDTO;
 
 import java.util.List;
 

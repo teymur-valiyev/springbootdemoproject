@@ -1,9 +1,9 @@
 package org.teamlearning.springbootdemo.service;
 
-import org.teamlearning.springbootdemo.dto.AssignTaskDTO;
-import org.teamlearning.springbootdemo.dto.TaskDTO;
-import org.teamlearning.springbootdemo.dto.TaskResponseDTO;
-import org.teamlearning.springbootdemo.dto.TaskUpdateDTO;
+import org.teamlearning.springbootdemo.domain.dto.AssignTaskDTO;
+import org.teamlearning.springbootdemo.domain.dto.TaskDTO;
+import org.teamlearning.springbootdemo.domain.dto.TaskResponseDTO;
+import org.teamlearning.springbootdemo.domain.dto.TaskUpdateDTO;
 
 import java.util.List;
 

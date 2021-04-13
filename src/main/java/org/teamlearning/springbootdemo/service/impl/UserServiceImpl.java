@@ -3,12 +3,11 @@ package org.teamlearning.springbootdemo.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.teamlearning.springbootdemo.dto.*;
-import org.teamlearning.springbootdemo.entities.Organizations;
-import org.teamlearning.springbootdemo.entities.User;
+import org.teamlearning.springbootdemo.domain.entities.Organizations;
+import org.teamlearning.springbootdemo.domain.entities.User;
 import org.teamlearning.springbootdemo.exception.ApiValidationException;
-import org.teamlearning.springbootdemo.mapper.UserMapper;
-import org.teamlearning.springbootdemo.objectmapper.UserObjectMapper;
+import org.teamlearning.springbootdemo.domain.mapper.UserMapper;
+import org.teamlearning.springbootdemo.domain.objectmapper.UserObjectMapper;
 import org.teamlearning.springbootdemo.service.UserService;
 
 import java.util.Collections;

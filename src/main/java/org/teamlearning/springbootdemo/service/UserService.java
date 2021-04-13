@@ -1,10 +1,10 @@
 package org.teamlearning.springbootdemo.service;
 
 
-import org.teamlearning.springbootdemo.dto.SignupDTO;
-import org.teamlearning.springbootdemo.dto.UserDTO;
-import org.teamlearning.springbootdemo.dto.UserResponseDTO;
-import org.teamlearning.springbootdemo.dto.UserUpdateDTO;
+import org.teamlearning.springbootdemo.domain.dto.SignupDTO;
+import org.teamlearning.springbootdemo.domain.dto.UserDTO;
+import org.teamlearning.springbootdemo.domain.dto.UserResponseDTO;
+import org.teamlearning.springbootdemo.domain.dto.UserUpdateDTO;
 
 
 public interface UserService {

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import org.teamlearning.springbootdemo.dto.ErrorDTO;
-import org.teamlearning.springbootdemo.dto.ErrorMessagesDTO;
+import org.teamlearning.springbootdemo.domain.dto.ErrorDTO;
+import org.teamlearning.springbootdemo.domain.dto.ErrorMessagesDTO;
 
 import java.util.ArrayList;
 import java.util.List;

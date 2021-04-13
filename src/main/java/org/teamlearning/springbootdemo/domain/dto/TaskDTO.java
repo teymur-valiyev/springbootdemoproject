@@ -3,6 +3,7 @@ package org.teamlearning.springbootdemo.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.teamlearning.springbootdemo.domain.enums.StatusEnum;
@@ -10,6 +11,7 @@ import org.teamlearning.springbootdemo.domain.enums.StatusEnum;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class TaskDTO   {
   @JsonProperty("title")
   private String title;

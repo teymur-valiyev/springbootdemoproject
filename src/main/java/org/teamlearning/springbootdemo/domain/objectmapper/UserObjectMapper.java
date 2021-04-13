@@ -1,14 +1,12 @@
 package org.teamlearning.springbootdemo.domain.objectmapper;
 
-
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
-import org.teamlearning.springbootdemo.domain.dto.SignupDTO;
-import org.teamlearning.springbootdemo.domain.dto.UserDTO;
-import org.teamlearning.springbootdemo.domain.entities.Organizations;
-import org.teamlearning.springbootdemo.domain.entities.User;
+import org.teamlearning.springbootdemo.domain.dto.*;
+import org.teamlearning.springbootdemo.domain.entities.*;
+
 
 @Mapper
 public interface UserObjectMapper {

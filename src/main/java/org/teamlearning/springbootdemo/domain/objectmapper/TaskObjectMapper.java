@@ -1,6 +1,5 @@
 package org.teamlearning.springbootdemo.domain.objectmapper;
 
-
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

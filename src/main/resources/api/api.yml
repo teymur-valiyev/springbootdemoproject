@@ -1,0 +1,537 @@
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "Swagger Demo"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/v1"
+tags:
+  - name: "user"
+    description: "Operations about user"
+  - name: "tasks"
+    description: "Task Api"
+  - name: "notification"
+    description: "Notification Api"
+
+schemes:
+  - "http"
+
+x-ok: &x-ok
+  200:
+    description: ОК
+
+x-400: &x-400
+  400:
+    $ref: '#/responses/BadRequest'
+x-401: &x-401
+  401:
+    $ref: '#/responses/Unauthorized'
+x-403: &x-403
+  403:
+    $ref: '#/responses/Unauthorized'
+x-404: &x-404
+  '404':
+    $ref: '#/responses/Forbidden'
+x-500: &x-500
+  500:
+    $ref: '#/responses/ServerError'
+
+x-errors: &x-errors
+  <<: *x-400
+  <<: *x-401
+  <<: *x-403
+  <<: *x-404
+  <<: *x-500
+
+responses:
+  BadRequest:
+    description: Bad request
+    schema:
+      $ref: '#/definitions/ErrorDTO'
+  Unauthorized:
+    description: Unauthorized
+    schema:
+      $ref: '#/definitions/ErrorDTO'
+  Forbidden:
+    description: Forbidden
+    schema:
+      $ref: '#/definitions/ErrorDTO'
+  NotFound:
+    description: The specified resource was not found
+    schema:
+      $ref: '#/definitions/ErrorDTO'
+  ServerError:
+    description: Server Error
+    schema:
+      $ref: '#/definitions/ErrorDTO'
+
+paths:
+  /user/signup:
+    post:
+      tags:
+        - "user"
+      summary: "Create organization"
+      description: "This can only be done by the logged in user."
+      operationId: "createOrganizationUser"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Created user object"
+          required: true
+          schema:
+            $ref: "#/definitions/SignupDTO"
+      responses:
+        <<: *x-ok
+        <<: *x-errors
+  /user:
+    post:
+      tags:
+        - "user"
+      summary: "Create user"
+      description: "This can only be done by the logged in user."
+      operationId: "createUser"
+      produces:
+        - "application/json"
+      parameters:
+        - name: admin
+          in: header
+          description: an authorization header
+          required: true
+          type: string
+        - name: password
+          in: header
+          description: an authorization header
+          required: true
+          type: string
+        - in: "body"
+          name: "body"
+          description: "Created user object"
+          required: true
+          schema:
+            $ref: "#/definitions/UserDTO"
+      responses:
+        <<: *x-ok
+        <<: *x-errors
+  /user/{userId}:
+    get:
+      tags:
+        - "user"
+      summary: "Get user by user name"
+      description: ""
+      operationId: "getUserByName"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/UserResponseDTO"
+        <<: *x-errors
+    put:
+      tags:
+        - "user"
+      summary: "Updated user"
+      description: "This can only be done by the logged in user."
+      operationId: "updateUser"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "name that need to be updated"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Updated user object"
+          required: true
+          schema:
+            $ref: "#/definitions/UserUpdateDTO"
+      responses:
+        <<: *x-ok
+        <<: *x-errors
+    delete:
+      tags:
+        - "user"
+      summary: "Delete user"
+      description: "This can only be done by the logged in user."
+      operationId: "deleteUser"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "The name that needs to be deleted"
+          required: true
+          type: "string"
+      responses:
+        <<: *x-ok
+        <<: *x-errors
+  /organization/{orgId}:
+    get:
+      tags:
+        - "user"
+      summary: "Get Ogranitaion by id"
+      description: ""
+      operationId: "getOrgnizationById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "orgId"
+          in: "path"
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/OrganizationResponseDTO"
+        <<: *x-errors
+    put:
+      tags:
+        - "user"
+      summary: "Updated Organization"
+      description: "."
+      operationId: "updateOrganizationById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "orgId"
+          in: "path"
+          description: "name that need to be updated"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Updated Organization object"
+          required: true
+          schema:
+            $ref: "#/definitions/OrganizationUpdateDTO"
+      responses:
+        <<: *x-ok
+        <<: *x-errors
+
+  /task:
+    post:
+      tags:
+        - "tasks"
+      summary: "Task"
+      description: ""
+      operationId: "addTask"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/TaskDTO"
+      responses:
+        <<: *x-ok
+        <<: *x-errors
+  /task/assign:
+    post:
+      tags:
+        - "tasks"
+      summary: ""
+      description: ""
+      operationId: "assign"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/AssignTaskDTO"
+      responses:
+        <<: *x-ok
+        <<: *x-errors
+  /task/unAssign:
+    post:
+      tags:
+        - "tasks"
+      summary: ""
+      description: ""
+      operationId: "unAssign"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/AssignTaskDTO"
+      responses:
+        <<: *x-ok
+        <<: *x-errors
+  /task/{taskId}:
+    get:
+      tags:
+        - "tasks"
+      summary: "Get tasks by taskId"
+      description: ""
+      operationId: "getTaskByTaskId"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "taskId"
+          in: "path"
+          description: ""
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/TaskResponseDTO"
+        <<: *x-errors
+
+    put:
+      tags:
+        - "tasks"
+      summary: "Updated task"
+      description: ""
+      operationId: "updateTask"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "taskId"
+          in: "path"
+          description: ""
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Updated task object"
+          required: true
+          schema:
+            $ref: "#/definitions/TaskUpdateDTO"
+      responses:
+        <<: *x-ok
+        <<: *x-errors
+    delete:
+      tags:
+        - "tasks"
+      summary: "Delete task"
+      description: ""
+      operationId: "deleteTask"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "taskId"
+          in: "path"
+          description: ""
+          required: true
+          type: "string"
+      responses:
+        <<: *x-ok
+        <<: *x-errors
+  /task/user/{userId}:
+    get:
+      tags:
+        - "tasks"
+      summary: "Get tasks by userId"
+      description: ""
+      operationId: "getTaskByUserId"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: ""
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/TaskResponseDTOs"
+        <<: *x-errors
+definitions:
+  ErrorDTO:
+    type: object
+    properties:
+      title:
+        type: string
+      status:
+        type: integer
+        format: int32
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/ErrorMessagesDTO'
+      traceId:
+        type: string
+    required:
+      - title
+      - detail
+      - status
+  ErrorMessagesDTO:
+    type: object
+    properties:
+      error:
+        type: string
+      code:
+        type: string
+  SignupDTO:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      phone:
+        type: "string"
+      address:
+        type: "string"
+      user:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+  UserDTO:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      surname:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+  UserResponseDTO:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      surname:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+  UserUpdateDTO:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      surname:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+  OrganizationResponseDTO:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      phone:
+        type: "string"
+      address:
+        type: "string"
+
+  OrganizationUpdateDTO:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      phone:
+        type: "string"
+      address:
+        type: "string"
+
+  TaskDTO:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      deadline:
+        type: "string"
+        format: "date-time"
+      status:
+        type: "string"
+        description: "Task Status"
+        enum:
+          - "To Do"
+          - "In Progress"
+          - "Done"
+      userId:
+        type: "string"
+  TaskUpdateDTO:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      deadline:
+        type: "string"
+        format: "date-time"
+      status:
+        type: "string"
+        description: "Task Status"
+        enum:
+          - "To Do"
+          - "In Progress"
+          - "Done"
+  TaskResponseDTOs:
+    type: "array"
+    items:
+      $ref: "#/definitions/TaskResponseDTO"
+  TaskResponseDTO:
+    type: "object"
+    properties:
+      taskId:
+        type: "string"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      deadline:
+        type: "string"
+        format: "date-time"
+      status:
+        type: "string"
+        description: "Task Status"
+        enum:
+          - "To Do"
+          - "In Progress"
+          - "Done"
+  AssignTaskDTO:
+    type: "object"
+    properties:
+      taskId:
+        type: "integer"
+        format: "int64"
+      userId:
+        type: "integer"
+        format: "int64"

@@ -1,0 +1,25 @@
+version: '3.5'
+services:
+  database:
+    container_name: springbootdemo
+    hostname: springbootdemo
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+    restart: always
+    #    volumes:
+    #      - db-backup:/data
+    ports:
+      - "5432:5432"
+
+#volumes:
+#  db-backup:
+#    driver: local
+#    driver_opts:
+#      type: none
+#      device: ${PWD}/backups/database
+#      o: bind
+
+

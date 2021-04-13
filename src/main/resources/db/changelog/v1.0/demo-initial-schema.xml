@@ -1,0 +1,74 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <changeSet id="1" author="arazhasanli82@gmail.com">
+
+        <createTable tableName="organizations">
+            <column name="id" type="smallint" autoIncrement="true" generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="organizations_pk"/>
+            </column>
+
+            <column name="created_at" type="timestamp without time zone" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR2(255)"/>
+            <column name="address" type="VARCHAR2(255)"/>
+            <column name="phone" type="VARCHAR2(255)"/>
+        </createTable>
+
+        <createTable tableName="users">
+            <column name="id" type="smallint" autoIncrement="true" generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="users_pk"/>
+            </column>
+            <column name="created_at" type="timestamp without time zone" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR2(50)"/>
+            <column name="surname" type="VARCHAR2(50)"/>
+            <column name="email" type="VARCHAR2(50)"/>
+            <column name="psw" type="VARCHAR2(64)"/>
+            <column name="role" type="VARCHAR2(10)"/>
+        </createTable>
+
+        <createTable tableName="task">
+            <column name="id" type="smallint" autoIncrement="true" generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="task_pk"/>
+            </column>
+            <column name="created_at" type="timestamp without time zone" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR2(50)"/>
+            <column name="description" type="VARCHAR2(255)"/>
+            <column name="deadline" type="VARCHAR2(100)"/>
+            <column name="status" type="VARCHAR2(20)"/>
+            <column name="userId" type="VARCHAR2(14)"/>
+        </createTable>
+
+        <createTable tableName="user_tasks">
+            <column name="id" type="smallint" autoIncrement="true" generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="user_pk"/>
+            </column>
+            <column name="created_at" type="timestamp without time zone" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_id" type="VARCHAR2(14)"/>
+            <column name="user_id" type="VARCHAR2(14)"/>
+        </createTable>
+
+        <createTable tableName="staff">
+            <column name="id" type="smallint" autoIncrement="true" generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="staff_pk"/>
+            </column>
+            <column name="created_at" type="timestamp without time zone" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organization_id" type="VARCHAR2(14)"/>
+            <column name="user_id" type="VARCHAR2(14)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

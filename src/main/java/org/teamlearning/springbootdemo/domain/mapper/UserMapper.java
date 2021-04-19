@@ -1,12 +1,14 @@
 package org.teamlearning.springbootdemo.domain.mapper;
 
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 import org.teamlearning.springbootdemo.domain.dto.SignupDTO;
 import org.teamlearning.springbootdemo.domain.dto.UserResponseDTO;
 import org.teamlearning.springbootdemo.domain.dto.UserUpdateDTO;
 import org.teamlearning.springbootdemo.domain.entities.Organizations;
 import org.teamlearning.springbootdemo.domain.entities.User;
 
+@Repository
 @Mapper
 public interface UserMapper {
     @Results(value = {
@@ -18,7 +20,7 @@ public interface UserMapper {
 
     @Insert("INSERT INTO public.organizations (name, phone, address) " +
             "VALUES (#{name}, #{phone},#{address})")
-    @SelectKey(statement = "SELECT currval('organizations_id_seq')", keyProperty = "id", before = false, resultType = int.class)
+    @SelectKey(statement = "select max(id) from organizations", keyProperty = "id", before = false, resultType = int.class)
     void createOrganization(Organizations org);
 
     @Insert("INSERT INTO public.staff (organization_id, user_id) " +
@@ -31,7 +33,8 @@ public interface UserMapper {
 
     @Insert("INSERT INTO public.users (name, surname, email, psw, role) " +
             "VALUES (#{name}, #{surname},#{email}, #{psw},  #{role})")
-    @SelectKey(statement = "SELECT currval('users_id_seq')", keyProperty = "id", before = false, resultType = int.class)
+//    @SelectKey(statement = "SELECT currval('users_id_seq')", keyProperty = "id", before = false, resultType = int.class)
+    @SelectKey(statement = "select max(id) from users", keyProperty = "id", before = false, resultType = int.class)
     void createUser(User user);
 
 
@@ -40,7 +43,7 @@ public interface UserMapper {
             @Result(property = "name", column = "name"),
             @Result(property = "surname", column = "surname"),
             @Result(property = "email", column = "email"),
-            @Result(property = "psw", column = "psw")
+            @Result(property = "password", column = "psw")
     })
     @Select("select * from users  where name=#{name}")
     UserResponseDTO getUserByName(@Param("name") String name);
@@ -56,7 +59,6 @@ public interface UserMapper {
     })
     @Select("select * from users  where name=#{name}")
     User getUserByNameAll(@Param("name") String name);
-
 
 
     @Update("UPDATE public.users SET name=#{userUpdateDTO.name}, surname=#{userUpdateDTO.surname}, email=#{userUpdateDTO.email}, psw=#{userUpdateDTO.password} where id=#{userId}")

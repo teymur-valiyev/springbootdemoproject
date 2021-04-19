@@ -78,12 +78,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         Map<String, Object> errorAttributes = this.errorAttributes.getErrorAttributes(request, false);
         String message = (String) errorAttributes.get("message");
 
+        ArrayList<ErrorMessagesDTO> messages = new ArrayList<>() {
+        };
+        messages.add(ErrorMessagesDTO.builder().code("500").error(message).build());
         ErrorDTO errorDTO = ErrorDTO.builder()
                 .title(status.getReasonPhrase())
                 .status(status.value())
                 .traceId(getCurrentTraceId())
-                .messages(new ArrayList<ErrorMessagesDTO>() {
-                })
+                .messages(messages)
                 .build();
 
         return new ResponseEntity<>(errorDTO, headers, status);

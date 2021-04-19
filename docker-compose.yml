@@ -1,23 +1,23 @@
 version: '3.5'
 services:
-  app:
-    container_name: springbootdemo
-    hostname: springbootdemo
-    build:
-      dockerfile: ./server/app/Dockerfile
-      context: .
-      args:
-        SPRING_ACTIVE_PROFILE: dev
-    environment:
-      APP_MODE: DEBUG
-      SPRING_ACTIVE_PROFILE: dev
-    ports:
-      - "8080:8080"
-      - "8000:8000"
-    #    volumes:
-    #      - app-backup:/app/files
-    depends_on:
-      - database
+#  app:
+#    container_name: springbootdemo
+#    hostname: springbootdemo
+#    build:
+#      dockerfile: ./server/app/Dockerfile
+#      context: .
+#      args:
+#        SPRING_ACTIVE_PROFILE: dev
+#    environment:
+#      APP_MODE: DEBUG
+#      SPRING_ACTIVE_PROFILE: dev
+#    ports:
+#      - "8080:8080"
+#      - "8000:8000"
+#    #    volumes:
+#    #      - app-backup:/app/files
+#    depends_on:
+#      - database
   database:
     container_name: springbootdemo
     hostname: springbootdemo

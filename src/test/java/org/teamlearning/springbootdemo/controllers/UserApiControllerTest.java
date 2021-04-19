@@ -36,8 +36,19 @@ class UserApiControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    private SignupDTO signupDTO;
+
     @BeforeEach
     void setUp() {
+        signupDTO = SignupDTO.builder()
+                .name("testmmc")
+                .address("london")
+                .phone("123789")
+                .email("test@mail.com")
+                .password("123456")
+                .user("john")
+                .build();
+        userService.createOrganizationUser(signupDTO);
     }
 
     @AfterEach
@@ -48,12 +59,12 @@ class UserApiControllerTest {
     void createOrganizationUser() throws Exception {
 
         SignupDTO user = SignupDTO.builder()
-                .name("testmmc")
-                .address("london")
+                .name("testforsignup")
+                .address("baku")
                 .phone("123789")
-                .email("test@mail.com")
+                .email("baku@mail.com")
                 .password("123456")
-                .user("john")
+                .user("alex")
                 .build();
 
         mockMvc.perform(post("/v1/user/signup/")
@@ -61,22 +72,12 @@ class UserApiControllerTest {
                 .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isOk());
 
-        UserResponseDTO john = userService.getUserByName("john");
+        UserResponseDTO john = userService.getUserByName(user.getUser());
         assertThat(user.getUser()).isEqualTo(john.getName());
     }
 
     @Test
     void createUser() throws Exception {
-        SignupDTO signupDTO = SignupDTO.builder()
-                .name("testmmc")
-                .address("london")
-                .phone("123789")
-                .email("test@mail.com")
-                .password("123456")
-                .user("john")
-                .build();
-
-        userService.createOrganizationUser(signupDTO);
 
         UserDTO userDTO = UserDTO.builder()
                 .name("ted")
@@ -98,16 +99,7 @@ class UserApiControllerTest {
 
     @Test
     void deleteUser() throws Exception {
-        SignupDTO signupDTO = SignupDTO.builder()
-                .name("testmmc")
-                .address("london")
-                .phone("123789")
-                .email("test@mail.com")
-                .password("123456")
-                .user("john")
-                .build();
 
-        userService.createOrganizationUser(signupDTO);
         UserResponseDTO user = userService.getUserByName(signupDTO.getUser());
 
         mockMvc.perform(delete("/v1/user/{userId}", user.getId()).contentType(MediaType.APPLICATION_JSON))
@@ -121,17 +113,6 @@ class UserApiControllerTest {
     @Test
     void getUserByName() throws Exception {
 
-        SignupDTO signupDTO = SignupDTO.builder()
-                .name("testmmc")
-                .address("london")
-                .phone("123789")
-                .email("test@mail.com")
-                .password("123456")
-                .user("john")
-                .build();
-
-        userService.createOrganizationUser(signupDTO);
-
         mockMvc.perform(get("/v1/user/{name}", "john").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -141,17 +122,6 @@ class UserApiControllerTest {
 
     @Test
     void updateUser() throws Exception {
-
-        SignupDTO signupDTO = SignupDTO.builder()
-                .name("testmmc")
-                .address("london")
-                .phone("123789")
-                .email("test@mail.com")
-                .password("123456")
-                .user("john")
-                .build();
-
-        userService.createOrganizationUser(signupDTO);
 
         UserResponseDTO user = userService.getUserByName(signupDTO.getUser());
 

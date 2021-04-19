@@ -45,7 +45,7 @@ public interface UserMapper {
             @Result(property = "email", column = "email"),
             @Result(property = "password", column = "psw")
     })
-    @Select("select * from users  where name=#{name}")
+    @Select("select * from users  where name=#{name} limit 1")
     UserResponseDTO getUserByName(@Param("name") String name);
 
     @Results(value = {
@@ -57,7 +57,7 @@ public interface UserMapper {
             @Result(property = "psw", column = "psw"),
             @Result(property = "role", column = "role")
     })
-    @Select("select * from users  where name=#{name}")
+    @Select("select * from users  where name=#{name} limit 1")
     User getUserByNameAll(@Param("name") String name);
 
 
